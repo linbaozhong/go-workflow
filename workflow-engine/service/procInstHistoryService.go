@@ -3,8 +3,8 @@ package service
 import (
 	"errors"
 
-	"github.com/go-workflow/go-workflow/workflow-engine/model"
 	"github.com/mumushuiding/util"
+	"go-workflow/workflow-engine/model"
 )
 
 // FindProcHistory 查询我的审批

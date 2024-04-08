@@ -5,7 +5,7 @@ import (
 	"log"
 	"strconv"
 
-	config "github.com/go-workflow/go-workflow/workflow-config"
+	config "go-workflow/workflow-config"
 
 	"github.com/jinzhu/gorm"
 
@@ -36,7 +36,7 @@ func Setup() {
 
 	db.LogMode(mode)
 
-	db.SingularTable(true) //全局设置表名不可以为复数形式
+	db.SingularTable(true) // 全局设置表名不可以为复数形式
 	// db.Callback().Create().Replace("gorm:update_time_stamp", updateTimeStampForCreateCallback)
 	idle, err := strconv.Atoi(conf.DbMaxIdleConns)
 	if err != nil {
@@ -62,7 +62,7 @@ func Setup() {
 	db.Model(&Execution{}).AddForeignKey("proc_inst_id", "proc_inst(id)", "CASCADE", "RESTRICT").AddIndex("idx_id", "id")
 	db.Model(&Identitylink{}).AddForeignKey("proc_inst_id", "proc_inst(id)", "CASCADE", "RESTRICT").AddIndex("idx_id", "id")
 	db.Model(&Task{}).AddForeignKey("proc_inst_id", "proc_inst(id)", "CASCADE", "RESTRICT").AddIndex("idx_id", "id")
-	//---------------------历史纪录------------------------------
+	// ---------------------历史纪录------------------------------
 	db.Model(&ProcInstHistory{}).AddIndex("idx_id", "id")
 	db.Model(&ExecutionHistory{}).AddForeignKey("proc_inst_id", "proc_inst_history(id)", "CASCADE", "RESTRICT").AddIndex("idx_id", "id")
 	db.Model(&IdentitylinkHistory{}).AddForeignKey("proc_inst_id", "proc_inst_history(id)", "CASCADE", "RESTRICT").AddIndex("idx_id", "id")

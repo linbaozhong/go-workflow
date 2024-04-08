@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-workflow/go-workflow/workflow-engine/model"
+	"go-workflow/workflow-engine/model"
 
 	"github.com/mumushuiding/util"
 
-	"github.com/go-workflow/go-workflow/workflow-engine/service"
+	"go-workflow/workflow-engine/service"
 )
 
 // StartProcessInstanceByToken 启动流程

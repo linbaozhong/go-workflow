@@ -8,12 +8,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/go-workflow/go-workflow/workflow-engine/flow"
+	"go-workflow/workflow-engine/flow"
 
 	"github.com/jinzhu/gorm"
 
-	"github.com/go-workflow/go-workflow/workflow-engine/model"
 	"github.com/mumushuiding/util"
+	"go-workflow/workflow-engine/model"
 )
 
 // TaskReceiver 任务
@@ -98,7 +98,7 @@ func Complete(taskID int, userID, username, company, comment, candidate string, 
 func UpdateTaskWhenComplete(taskID int, userID string, pass bool, tx *gorm.DB) (*model.Task, error) {
 	// 获取task
 	completeLock.Lock()         // 关锁
-	defer completeLock.Unlock() //解锁
+	defer completeLock.Unlock() // 解锁
 	// 查询任务
 	task, err := GetTaskByID(taskID)
 	if err != nil {
@@ -118,7 +118,7 @@ func UpdateTaskWhenComplete(taskID int, userID string, pass bool, tx *gorm.DB) (
 	task.Assignee = userID
 	task.ClaimTime = util.FormatDate(time.Now(), util.YYYY_MM_DD_HH_MM_SS)
 	// ----------------会签 （默认全部通过才结束），只要存在一个不通过，就结束，然后流转到上一步
-	//同意
+	// 同意
 	if pass {
 		task.AgreeNum++
 	} else {
@@ -143,7 +143,7 @@ func UpdateTaskWhenComplete(taskID int, userID string, pass bool, tx *gorm.DB) (
 // 执行任务
 func CompleteTaskTx(taskID int, userID, username, company, comment, candidate string, pass bool, tx *gorm.DB) error {
 
-	//更新任务
+	// 更新任务
 	task, err := UpdateTaskWhenComplete(taskID, userID, pass, tx)
 	if err != nil {
 		return err
@@ -339,10 +339,10 @@ func MoveStage(nodeInfos []*flow.NodeInfo, userID, username, company, comment, c
 }
 
 // MoveToNextStage MoveToNextStage
-//通过
+// 通过
 func MoveToNextStage(nodeInfos []*flow.NodeInfo, userID, company string, currentTaskID, procInstID, step int, tx *gorm.DB) error {
 	var currentTime = util.FormatDate(time.Now(), util.YYYY_MM_DD_HH_MM_SS)
-	var task = getNewTask(nodeInfos, step, procInstID, currentTime) //新任务
+	var task = getNewTask(nodeInfos, step, procInstID, currentTime) // 新任务
 	var procInst = &model.ProcInst{                                 // 流程实例要更新的字段
 		NodeID:    nodeInfos[step].NodeID,
 		Candidate: nodeInfos[step].Aprover,
@@ -395,7 +395,7 @@ func MoveToNextStage(nodeInfos []*flow.NodeInfo, userID, company string, current
 // 驳回
 func MoveToPrevStage(nodeInfos []*flow.NodeInfo, userID, company string, currentTaskID, procInstID, step int, tx *gorm.DB) error {
 	// 生成新的任务
-	var task = getNewTask(nodeInfos, step, procInstID, util.FormatDate(time.Now(), util.YYYY_MM_DD_HH_MM_SS)) //新任务
+	var task = getNewTask(nodeInfos, step, procInstID, util.FormatDate(time.Now(), util.YYYY_MM_DD_HH_MM_SS)) // 新任务
 	taksID, err := task.NewTaskTx(tx)
 	if err != nil {
 		return err

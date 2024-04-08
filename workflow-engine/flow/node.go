@@ -131,7 +131,7 @@ type NodeInfo struct {
 
 // GetProcessConfigFromJSONFile test
 func (n *Node) GetProcessConfigFromJSONFile() {
-	file, err := os.Open("D:/Workspaces/go/src/github.com/go-workflow/go-workflow/processConfig2.json")
+	file, err := os.Open("D:/ssld/go-workflow/processConfig2.json")
 	if err != nil {
 		log.Printf("cannot open file processConfig.json:%v", err)
 		panic(err)
@@ -314,7 +314,7 @@ func getConditionNode(nodes []*Node, maps *map[string]string) (result *Node, err
 		return nodesChan
 	}
 
-	//获取所有conditions
+	// 获取所有conditions
 	getConditionNode := func(nodesChan <-chan *Node, done <-chan interface{}) <-chan *Node {
 		resultStream := make(chan *Node, 2)
 		go func() {

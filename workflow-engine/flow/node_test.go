@@ -2,6 +2,8 @@ package flow
 
 import (
 	"fmt"
+	"github.com/mumushuiding/util"
+	"log"
 	"testing"
 )
 
@@ -18,21 +20,21 @@ func TestNode(t *testing.T) {
 	}
 }
 
-// func TestNodeGenerateNodeInfos(t *testing.T) {
-// 	var node = Node{}
-// 	node.GetProcessConfigFromJSONFile()
-// 	// result, _ := util.ToJSONStr(node)
-// 	// fmt.Println(result)
-// 	maps := make(map[string]string)
-// 	maps["DDHolidayField-J2BWEN12__duration"] = "8"
-// 	maps["DDHolidayField-J2BWEN12__options"] = "年假"
-// 	list, err := ParseProcessConfig(&node, &maps)
-// 	if err != nil {
-// 		log.Printf("err:%v", err)
-// 	}
-// 	str, _ := util.ToJSONStr(util.List2Array(list))
-// 	fmt.Println(str)
-// }
+func TestNodeGenerateNodeInfos(t *testing.T) {
+	var node = Node{}
+	node.GetProcessConfigFromJSONFile()
+	// result, _ := util.ToJSONStr(node)
+	// fmt.Println(result)
+	maps := make(map[string]string)
+	maps["DDHolidayField-J2BWEN12__duration"] = "8"
+	maps["DDHolidayField-J2BWEN12__options"] = "年假"
+	list, err := ParseProcessConfig(&node, &maps)
+	if err != nil {
+		log.Printf("err:%v", err)
+	}
+	str, _ := util.ToJSONStr(util.List2Array(list))
+	fmt.Println(str)
+}
 
 // func BenchmarkTest(b *testing.B) {
 // 	for i := 0; i < b.N; i++ {

@@ -1,9 +1,9 @@
 package service
 
 import (
-	"github.com/go-workflow/go-workflow/workflow-engine/model"
 	"github.com/jinzhu/gorm"
 	"github.com/mumushuiding/util"
+	"go-workflow/workflow-engine/model"
 )
 
 // SaveIdentitylinkTx SaveIdentitylinkTx
@@ -92,7 +92,7 @@ func AddCandidateUserTx(userID, company string, step, taskID, procInstID int, tx
 	// return err2
 }
 
-//AddParticipantTx AddParticipantTx
+// AddParticipantTx AddParticipantTx
 // 添加任务参与人
 func AddParticipantTx(userID, username, company, comment string, taskID, procInstID, step int, tx *gorm.DB) error {
 	i := &model.Identitylink{
