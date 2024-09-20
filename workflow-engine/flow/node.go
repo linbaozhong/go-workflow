@@ -44,11 +44,11 @@ type NodeType int
 
 const (
 	// START 类型start
-	START NodeType = iota
-	ROUTE
-	CONDITION
-	APPROVER
-	NOTIFIER
+	START     NodeType = iota // 开始
+	ROUTE                     // 路由
+	CONDITION                 // 条件
+	APPROVER                  // 审批人
+	NOTIFIER                  // 通知人
 )
 
 // ActionRuleType 审批人类型
